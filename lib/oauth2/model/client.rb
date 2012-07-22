@@ -1,8 +1,15 @@
 module OAuth2
   module Model
     
-    class Client < ActiveRecord::Base
-      self.table_name = :oauth2_clients
+    class Client
+      include MongoMapper::Document
+      key :oauth2_client_owner_type,  String
+      key :oauth2_client_owner_id,    Integer
+      key :name,                      String
+      key :client_id,                 String
+      key :client_secret_hash,        String
+      key :redirect_uri,              String
+      key :auth_removal_callback_url, String
       
       belongs_to :oauth2_client_owner, :polymorphic => true
       alias :owner  :oauth2_client_owner

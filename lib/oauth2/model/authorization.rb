@@ -1,8 +1,15 @@
 module OAuth2
   module Model
     
-    class Authorization < ActiveRecord::Base
-      self.table_name = :oauth2_authorizations
+    class Authorization
+      include MongoMapper::Document
+      key :oauth2_resource_owner_type,  String
+      key :oauth2_resource_owner_id,    Integer
+      key :scope,                       String
+      key :code,                        String
+      key :access_token_hash,           String
+      key :refresh_token_hash,          String
+      key :expires_at,                  Time
       
       belongs_to :oauth2_resource_owner, :polymorphic => true
       alias :owner  :oauth2_resource_owner
