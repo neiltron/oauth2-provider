@@ -9,13 +9,12 @@ module OAuth2
       key :client_id,                 String
       key :client_secret_hash,        String
       key :redirect_uri,              String
-      key :auth_removal_callback_url, String
       
       belongs_to :oauth2_client_owner, :polymorphic => true
       alias :owner  :oauth2_client_owner
       alias :owner= :oauth2_client_owner=
           
-      has_many :authorizations, :class_name => 'OAuth2::Model::Authorization', :dependent => :destroy
+      many :authorizations, :class_name => 'OAuth2::Model::Authorization', :dependent => :destroy
       
       validates_uniqueness_of :client_id
       validates_presence_of   :name, :redirect_uri
