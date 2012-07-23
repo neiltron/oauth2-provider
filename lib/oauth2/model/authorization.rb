@@ -4,7 +4,8 @@ module OAuth2
     class Authorization
       include MongoMapper::Document
       key :oauth2_resource_owner_type,  String
-      key :oauth2_resource_owner_id,    Integer
+      key :oauth2_resource_owner_id,    String
+      key :client_id,                   String
       key :scope,                       String
       key :code,                        String
       key :access_token_hash,           String
@@ -54,12 +55,9 @@ module OAuth2
       end
       
       def self.for_response_type(response_type, attributes = {})
-        instance = self.for(attributes[:owner], attributes[:client]) ||
-                   new do |authorization|
-                     authorization.owner  = attributes[:owner]
-                     authorization.client = attributes[:client]
-                   end
-        
+        instance = self.for(attributes[:owner], attributes[:client]) || self.new
+        instance.owner  = attributes[:owner]
+        instance.client = attributes[:client]
         case response_type
           when CODE
             instance.code ||= create_code(attributes[:client])
