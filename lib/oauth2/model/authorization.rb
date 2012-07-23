@@ -80,7 +80,8 @@ module OAuth2
           scopes = instance.scopes + attributes[:scope].split(/\s+/)
           instance.scope = scopes.entries.join(' ')
         end
-        
+        instance.owner.oauth2_authorizations += [instance]
+        instance.owner.save
         instance.save && instance
       end
       

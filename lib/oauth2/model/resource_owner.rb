@@ -6,7 +6,8 @@ module OAuth2
         klass.many :oauth2_authorizations,
                        :class_name => 'OAuth2::Model::Authorization',
                        :as => :oauth2_resource_owner,
-                       :dependent => :destroy
+                       :dependent => :destroy,
+                       :polymorphic => true
       end
       
       def grant_access!(client, options = {})
