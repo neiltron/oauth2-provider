@@ -96,7 +96,7 @@ module OAuth2
         
         elsif @params[RESPONSE_TYPE] == 'token'
           fragment = to_query_string(ACCESS_TOKEN, EXPIRES_IN, SCOPE, STATE)
-          "#{ base_redirect_uri }##{ fragment }"
+          "#{ base_redirect_uri }?#{ fragment }"
         
         else
           query = to_query_string(CODE, SCOPE, STATE)
