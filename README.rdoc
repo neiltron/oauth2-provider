@@ -53,7 +53,7 @@ need to provide four things:
 If you are using Bundler, put this in your Gemfile:
 
   gem 'oauth2-provider', :require => 'oauth2/provider',
-    :git => 'git://github.com/songkick/oauth2-provider'
+    :git => 'git://github.com/neiltron/oauth2-provider'
 
 If you are not using Bundler, put the library in your load path and
 require it:
